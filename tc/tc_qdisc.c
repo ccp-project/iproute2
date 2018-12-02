@@ -229,7 +229,7 @@ int print_qdisc(const struct sockaddr_nl *who,
 	if (n->nlmsg_type == RTM_DELQDISC)
 		fprintf(fp, "deleted ");
 
-	fprintf(fp, "qdisc %s %x: ", (char*)RTA_DATA(tb[TCA_KIND]), t->tcm_handle>>16);
+	fprintf(fp, "qdisc %s handle(maj=0x%x,0x%x): ", (char*)RTA_DATA(tb[TCA_KIND]), t->tcm_handle>>16, t->tcm_handle&0xFFFF);
 	if (filter_ifindex == 0)
 		fprintf(fp, "dev %s ", ll_index_to_name(t->tcm_ifindex));
 	if (t->tcm_parent == TC_H_ROOT)
